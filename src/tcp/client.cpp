@@ -2,7 +2,6 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <iostream>
-#include <tchar.h>
 
 int main() {
     WORD wVersionRequired = MAKEWORD(2, 2);
@@ -13,7 +12,7 @@ int main() {
     }
     wprintf(L"\nloaded winsock2, version: %d.%d\n", LOBYTE(wsaData.wVersion), HIBYTE(wsaData.wVersion));
 
-    // create a unconnecte socket
+    // create a unconnected socket
     SOCKET socketClient = INVALID_SOCKET;
     int af = AF_INET;
     int type = SOCK_STREAM;
@@ -29,18 +28,16 @@ int main() {
     }
     wprintf(L"socket created\n");
 
-    // connect to the server socket whick is listening on a specific sin_port
+    // connect to the server socket whick is listening on a specific port
 
     sockaddr_in sName;  // name of the server 
     sName.sin_family = af;
-    sName.sin_port = htons(55555);
-    sName.sin_addr.s_addr = inet_addr("127.0.0.1");
+    sName.sin_port = htons(/*the port number on which the server socket listening*/);
+    sName.sin_addr.s_addr = inet_addr("/*ip address of server*/");
     
     if(connect(socketClient, (SOCKADDR*) & sName, sizeof(sName)) == SOCKET_ERROR) {
         wprintf(L"connect() failed! error: %d\n", WSAGetLastError());
-
         WSACleanup();
-
         getchar();
         return 1;
     }
