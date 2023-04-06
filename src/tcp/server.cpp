@@ -1,7 +1,6 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <iostream>
-#include <tchar.h>
 
 int main() {
     
@@ -33,11 +32,11 @@ int main() {
 
     // bind an ip address and port number to the socket
     // basically give the socket a name to use
-    int portListen = 55555;
+    int portListen = /*some port number which is free*/;
     sockaddr_in name;
     name.sin_family = af;
     name.sin_port = htons(portListen);
-    name.sin_addr.s_addr = inet_addr("127.0.0.1");
+    name.sin_addr.s_addr = inet_addr("/*ip address*/");
     
     if(bind(socketServer, (SOCKADDR*) &name, sizeof(name)) == SOCKET_ERROR) {
         wprintf(L"bind() failed! error: %d\n", WSAGetLastError());
